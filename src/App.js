@@ -1,31 +1,21 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import "./App.css";
-import { getMonth } from "./util";
-import CalendarHeader from "./components/CalendarHeader";
-import Sidebar from "./components/Sidebar";
-import Month from "./components/Month";
-import GlobalContext from "./context/GlobalContext";
-import EventModal from "./components/EventModal";
+import Home from './pages/Home'
+import LoginPage from './pages/Login'
+import SignupPage from './pages/Signup'
+import { Route, Routes } from "react-router";
+import { AuthProvider } from "./backend/AuthContext";
+import PrivateRoute from "./components/PrivateRoute";
+
 function App() {
-  const [currenMonth, setCurrentMonth] = useState(getMonth());
-  const { monthIndex, showEventModal } = useContext(GlobalContext);
-
-  useEffect(() => {
-    setCurrentMonth(getMonth(monthIndex));
-  }, [monthIndex]);
-
   return (
-    <React.Fragment>
-      {showEventModal && <EventModal />}
-
-      <div className="h-screen flex flex-col">
-        <CalendarHeader />
-        <div className="flex flex-1">
-          <Sidebar />
-          <Month month={currenMonth} />
-        </div>
-      </div>
-    </React.Fragment>
+    <AuthProvider>
+        <Routes>
+            <Route path="/" element={<Home />}/>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+        </Routes>
+    </AuthProvider>
   );
 }
 

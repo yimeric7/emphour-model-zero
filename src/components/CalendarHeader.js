@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import React, { useContext } from "react";
 import logo from "../assets/logo.png";
 import GlobalContext from "../context/GlobalContext";
+import SideHeader from "./SideHeader";
 export default function CalendarHeader() {
   const { monthIndex, setMonthIndex } = useContext(GlobalContext);
   function handlePrevMonth() {
@@ -19,7 +20,7 @@ export default function CalendarHeader() {
   }
   return (
     <header className="px-4 py-2 flex items-center">
-      <img src={logo} alt="calendar" className="mr-2 w-12 h-12" />
+      <img src={logo} alt="calendar" className="mr-4 w-9 h-9" />
       <h1 className="mr-10 text-xl text-gray-500 fond-bold">
         Calendar
       </h1>
@@ -44,6 +45,9 @@ export default function CalendarHeader() {
           "MMMM YYYY"
         )}
       </h2>
+
+    <SideHeader/>
+
     </header>
   );
 }
